@@ -1,129 +1,114 @@
-const Engine = Matter.Engine
-const World = Matter.World
-const Bodies = Matter.Bodies
-const Constraint = Matter.Constraint
-var engine, world;
+const Engine = Matter.Engine;
+const World= Matter.World;
+const Bodies = Matter.Bodies;
+const Constraint = Matter.Constraint;
 
-var holder, polygon, ground;
-var stand1, stand2;
-var slingShot;
-var hex;
+var engine, world, hex;
 
 function preload(){
-  hex = loadImage("hex.png");
+  hex = loadImage("hexagon.png");
+
 }
 
 function setup() {
-  createCanvas(800,400);
+  createCanvas(1500,600);
   engine = Engine.create();
   world = engine.world;
-  
-  //My engine = Engine.create(); is not working
 
-  ground = new Ground();
-  stand1 = new Stand(380,300,270,10);
-  stand2 = new Stand(700,200,200,10);
+  block1 = new Block(600,260,30,40);
+  block2 = new Block(570,260,30,40);
+  block3 = new Block(540,260,30,40);
+  block4 = new Block(630,260,30,40);
+  block5 = new Block(660,260,30,40);
 
-  box1 = new Box(280,275,30,40);  
-  box2 = new Box(310,275,30,40);
-  box3 = new Box(340,275,30,40);
-  box4 = new Box(370,275,30,40);
-  box5 = new Box(400,275,30,40);
-  box6 = new Box(430,275,30,40);
-  box7 = new Box(460,275,30,40);
-  box8 = new Box(490,275,30,40);
-  box9 = new Box(310,235,30,40);
-  box10 = new Box(340,235,30,40);
-  box11 = new Box(370,235,30,40);
-  box12 = new Box(400,235,30,40);
-  box13 = new Box(430,235,30,40);
-  box14 = new Box(460,235,30,40);
-  box15 = new Box(340,195,30,40);
-  box16 = new Box(370,195,30,40);
-  box17 = new Box(400,195,30,40);
-  box18 = new Box(430,195,30,40);
-  box19 = new Box(370,155,30,40);
-  box20 = new Box(400,155,30,40);
-  box21 = new Box(385,115,30,40);
+  block6 = new Block(585,220,30,40);
+  block7 = new Block(555,220,30,40);
+  block8 = new Block(615,220,30,40);
+  block9 = new Block(645,220,30,40);
 
-  boxa = new Box(640,175,30,40);
-  boxb = new Box(670,175,30,40);
-  boxc = new Box(700,175,30,40);
-  boxd = new Box(730,175,30,40);
-  boxe = new Box(760,175,30,40);
-  boxf = new Box(670,135,30,40);
-  boxg = new Box(700,135,30,40);
-  boxh = new Box(730,135,30,40);
-  boxi = new Box(700,95,30,40);
+  bolck10 = new Block(600,170,30,40);
+  block11 = new Block(570,180,30,40);
+  block12 = new Block(630,180,30,40);
 
-  polygon = Bodies.circle(50,200,20);
-  World.add(world,polygon);
+  block13 = new Block(600,140,30,40);
 
-  slingShot = new Slingshot(this.polygon,{x:200,y:200});
+  ground1 = new Ground(600,285,200,10);
+  ground2 = new Ground(900,195,200,10);
+  ground3 = new Ground(750, 600, 1500, 10)
+
+  block14 = new Block(900,170,30,40);
+  block15 = new Block(930,170,30,40);
+  block16 = new Block(870,170,30,40);
+  block17 = new Block(840,170,30,40);
+  block18 = new Block(960,170,30,40);
+
+  block19 = new Block(900,140,30,40);
+  block20 = new Block(930,140,30,40);
+  block21 = new Block(870,140,30,40);
+
+  block22 = new Block(900,110,30,40);
+
+  ball = Bodies.circle(50,200,20);
+  World.add(world,ball);
+
+  sling = new Slingshot(this.ball,{x:150, y:160});
 }
 
-function draw(){
+function draw() {
   background("grey");
   Engine.update(engine);
 
+  fill("blue");
+  block1.display();
+  block2.display();
+  block3.display();
+  block4.display();
+  block5.display();
+
+  fill("pink");
+  block6.display();
+  block7.display();
+  block8.display();
+  block9.display();
+
+  fill("lightblue");
+  bolck10.display();
+  block11.display();
+  block12.display();
+  fill("black");
+
+  block13.display();
+
   fill(rgb(135, 205, 236));
-  box1.display();
-  box2.display();
-  box3.display();
-  box4.display();
-  box5.display();
-
-  fill("lightBlue");
-  box6.display();
-  box7.display();
-  box8.display();
-  box9.display();
-
-  fill("lightPink");
-  box10.display();
-  box11.display();
-  boxk12.display();
-
-  fill(rgb(47, 48, 48));
-  box13.display();
-
-  fill(rgb(135, 205, 236));
-  box14.display();
-  box15.display();
-  box16.display();
-  box17.display();
-  box18.display();
+  block14.display();
+  block15.display();
+  block16.display();
+  block17.display();
+  block18.display();
   fill("lightGreen");
 
-  box19.display();
-  box20.display();
-  box21.display();
-  fill("lime");
+  block19.display();
+  block20.display();
+  block21.display();
+  fill("black");
 
-  boxa.display();
-  boxb.display();
-  boxc.display();
-  boxd.display();
-  boxe.display();
-  boxf.display();
-  boxg.display();
-  boxh.display();
-  boxi.display();
+  block22.display();
 
-  stand1.display();
-  stand2.display();
+  ground1.display();
+  ground2.display();
+  ground3.display();
 
-  //imageMode(CENTER);
-  //image(hex,polygon.position.x,polygon.position.y,40,40);
+  imageMode(CENTER);
+  image(hex,ball.position.x,ball.position.y,40,40);
 
-  slingShot.display();
-  ellipse(polygon.position.x, polygon.position.y,20);
+  sling.display();
 }
 
 function mouseDragged(){
-  Matter.Body.setPosition(this.ball, {x:mouseX,y:mouseY})
+  Matter.Body.setPosition(this.ball, {x: mouseX , y: mouseY});
 }
 
 function mouseReleased(){
-  slingShot.fly();
+  sling.fly();
 }
+
